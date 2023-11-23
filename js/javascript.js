@@ -1,3 +1,6 @@
+let playerWins = 0;
+let computerWins = 0;
+let tieGames = 0;
 
 const getComputerChoice = () => {
     let elements = ["rock", "paper", "scissor"];
@@ -7,7 +10,6 @@ const getComputerChoice = () => {
     return randomElement;
 }
 
-let computerSelection = getComputerChoice();
 
 const getPlayerChoice = () => {
     let playerElement = prompt("Select a element between: Rock, Paper or Scissors");
@@ -16,41 +18,69 @@ const getPlayerChoice = () => {
     return playerElement;
 }
 
-let playerSelection = getPlayerChoice();
 
-function playRound(computerSelection, playerSelection) {
-    let details = `COMPUTER: ${computerSelection} - PLAYER: ${playerSelection}`;
 
-    if(computerSelection === "rock" && playerSelection === "scissor") {
+function playRound(computerElement, playerElement) {
+    let details = `COMPUTER: ${computerElement} vs PLAYER: ${playerElement}`;
+
+    if(computerElement === "rock" && playerElement === "scissor") {
+        computerWins++;
         return  details + "\n You Lose! Rock beats Scissor";
-    } else if(computerSelection === "rock" && playerSelection === "paper") {
+    } else if(computerElement === "rock" && playerElement === "paper") {
+        playerWins++;
         return  details + "\n You Win! Paper beats Rock";
-    } else if(computerSelection === "rock" && playerSelection === "rock") {
+    } else if(computerElement === "rock" && playerElement === "rock") {
+        tieGames++;
         return  details + "\n TIE GAME";
-    } else if(playerSelection === "rock" && computerSelection === "scissor") {
+    } else if(playerElement === "rock" && computerElement === "scissor") {
+        playerWins++;
         return  details + "\n You Win! Rock beats Scissor";
-    } else if(playerSelection === "rock" && computerSelection === "paper") {
+    } else if(playerElement === "rock" && computerElement === "paper") {
+        computerWins++;
         return  details + "\n You Lose! Paper beats Rock";
-    } else if(playerSelection === "scissor" && computerSelection === "rock") {
+    } else if(playerElement === "scissor" && computerElement === "rock") {
+        computerWins++;
         return  details + "\n You Lose! Rock beats Scissor";
-    } else if(playerSelection === "scissor" && computerSelection === "paper") {
+    } else if(playerElement === "scissor" && computerElement === "paper") {
+        playerWins++;
         return  details + "\n You Win! Scissor beats Paper";
-    } else if(playerSelection === "scissor" && computerSelection === "scissor") {
+    } else if(playerElement === "scissor" && computerElement === "scissor") {
+        tieGames++;
         return  details + "\n TIE GAME";
-    } else 	if(computerSelection === "scissor" && playerSelection === "rock") {
+    } else if(computerElement === "scissor" && playerElement === "rock") {
+        playerWins++;
         return  details + "\n You Win! Rock beats Scissor";
-    } else if(computerSelection === "scissor" && playerSelection === "paper") {
+    } else if(computerElement === "scissor" && playerElement === "paper") {
+        computerWins++;
         return  details + "\n You Lose! Scissor beats Paper";
-    } else if(playerSelection === "paper" && computerSelection === "rock") {
+    } else if(playerElement === "paper" && computerElement === "rock") {
+        playerWins++;
         return  details + "\n You Win! Paper beats Rock";
-    } else if(playerSelection === "paper" && computerSelection === "scissor") {
+    } else if(playerElement === "paper" && computerElement === "scissor") {
+        computerWins++;
         return  details + "\n You Lose! Scissor beats Paper";
-    } else if(playerSelection === "paper" && computerSelection === "paper") {
+    } else if(playerElement === "paper" && computerElement === "paper") {
+        tieGames++;
         return  details + "\n TIE GAME";
-    } else 	if(computerSelection === "paper" && playerSelection === "rock") {
+    } else if(computerElement === "paper" && playerElement === "rock") {
+        computerWins++;
         return  details + "\n You Lose! Paper beats Rock";
-    } else if(computerSelection === "paper" && playerSelection === "scissor") {
+    } else if(computerElement === "paper" && playerElement === "scissor") {
+        playerWins++;
         return  details + "\n You Win! Scissor beats Paper";
     } 
 }
-console.log(playRound(computerSelection, playerSelection));
+
+const game = () => {
+
+    for(let i = 0; i < 5; i++){
+        console.log(playRound(getComputerChoice(), getPlayerChoice()));
+    }
+
+    return console.log(`La puntuación final es --> Jugador: ${playerWins} Computadora: ${computerWins} Empate: ${tieGames}`);
+}
+
+game();
+
+
+
